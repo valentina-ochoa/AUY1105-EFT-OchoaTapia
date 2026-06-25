@@ -4,12 +4,12 @@ output "instance_id" {
 }
 
 output "instance_ip" {
-  description = "Dirección IP privada de la instancia EC2."
+  description = "Direccion IP privada de la instancia EC2."
   value       = aws_instance.ec2.private_ip
 }
 
 output "instance_public_ip" {
-  description = "IP pública de la instancia (null si associate_public_ip es false)."
+  description = "IP publica de la instancia (null si associate_public_ip es false)."
   value       = aws_instance.ec2.public_ip
 }
 
@@ -30,12 +30,12 @@ output "ami_id" {
 
 output "iam_role_arn" {
   description = "ARN del rol IAM de la instancia EC2."
-  value       = aws_iam_role.ec2_role.arn
+  value       = data.aws_iam_role.lab_role.arn
 }
 
 output "iam_role_name" {
   description = "Nombre del rol IAM de la instancia EC2."
-  value       = aws_iam_role.ec2_role.name
+  value       = data.aws_iam_role.lab_role.name
 }
 
 output "instance_profile_name" {

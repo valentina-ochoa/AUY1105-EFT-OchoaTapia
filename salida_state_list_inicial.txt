@@ -1,0 +1,6 @@
+module.ec2.data.aws_ami.ubuntu
+module.vpc.data.aws_caller_identity.current
+module.vpc.aws_default_security_group.default
+module.vpc.aws_kms_key.logs_key
+module.vpc.aws_subnet.public[0]
+module.vpc.aws_vpc.main

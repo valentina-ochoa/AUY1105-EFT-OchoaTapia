@@ -1,5 +1,9 @@
 data "aws_caller_identity" "current" {}
 
+data "aws_iam_role" "lab_role" {
+  name = "LabRole"
+}
+
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -59,77 +63,12 @@ resource "aws_security_group" "main" {
   })
 }
 
-resource "aws_kms_key" "logs_key" {
-  description             = "KMS key para CloudWatch Logs - ${var.project_name}"
-  deletion_window_in_days = 7
-  enable_key_rotation     = true
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
-        }
-        Action   = "kms:*"
-        Resource = "*"
-      }
-    ]
-  })
-
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-kms"
-  })
-}
-
 resource "aws_cloudwatch_log_group" "vpc_flow_logs" {
   name              = "/aws/vpc/${var.project_name}-flow-logs"
   retention_in_days = var.log_retention_days
-  kms_key_id        = aws_kms_key.logs_key.arn
 
   tags = merge(var.tags, {
     Name = "${var.project_name}-loggroup"
-  })
-}
-
-resource "aws_iam_role" "flow_logs_role" {
-  name = "${var.project_name}-flowlogs-role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          Service = "vpc-flow-logs.amazonaws.com"
-        }
-        Action = "sts:AssumeRole"
-      }
-    ]
-  })
-
-  tags = merge(var.tags, {
-    Name = "${var.project_name}-flowlogs-role"
-  })
-}
-
-resource "aws_iam_role_policy" "flow_logs_policy" {
-  name = "${var.project_name}-flowlogs-policy"
-  role = aws_iam_role.flow_logs_role.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-          "logs:CreateLogStream",
-          "logs:PutLogEvents"
-        ]
-        Resource = format("%s:*", aws_cloudwatch_log_group.vpc_flow_logs.arn)
-      }
-    ]
   })
 }
 
@@ -138,7 +77,7 @@ resource "aws_flow_log" "vpc_flow_logs" {
   log_destination_type = "cloud-watch-logs"
   traffic_type         = "ALL"
   vpc_id               = aws_vpc.main.id
-  iam_role_arn         = aws_iam_role.flow_logs_role.arn
+  iam_role_arn         = data.aws_iam_role.lab_role.arn
 
   tags = merge(var.tags, {
     Name = "${var.project_name}-flowlog"

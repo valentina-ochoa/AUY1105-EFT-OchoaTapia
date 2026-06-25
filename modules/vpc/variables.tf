@@ -33,8 +33,8 @@ variable "availability_zones" {
 
 variable "sg_description" {
   type        = string
-  description = "Descripción del Security Group principal del módulo."
-  default     = "Security Group gestionado por el módulo VPC"
+  description = "Descripcion del Security Group principal del modulo."
+  default     = "Security Group gestionado por el modulo VPC"
 }
 
 variable "ingress_rules" {
@@ -59,7 +59,7 @@ variable "ingress_rules" {
 
 variable "log_retention_days" {
   type        = number
-  description = "Días de retención para los VPC Flow Logs en CloudWatch."
+  description = "Dias de retencion para los VPC Flow Logs en CloudWatch."
   default     = 365
 
   validation {
@@ -70,6 +70,6 @@ variable "log_retention_days" {
 
 variable "tags" {
   type        = map(string)
-  description = "Etiquetas adicionales para todos los recursos del módulo."
+  description = "Etiquetas adicionales para todos los recursos del modulo."
   default     = {}
 }

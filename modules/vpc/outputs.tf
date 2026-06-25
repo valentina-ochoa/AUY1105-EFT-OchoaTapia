@@ -28,11 +28,6 @@ output "security_group_name" {
   value       = aws_security_group.main.name
 }
 
-output "kms_key_arn" {
-  description = "ARN de la llave KMS para cifrado de logs."
-  value       = aws_kms_key.logs_key.arn
-}
-
 output "flow_log_id" {
   description = "ID del VPC Flow Log configurado."
   value       = aws_flow_log.vpc_flow_logs.id

@@ -1,10 +1,10 @@
 output "vpc_id" {
-  description = "ID de la VPC creada por el módulo VPC."
+  description = "ID de la VPC creada por el modulo VPC."
   value       = module.vpc.vpc_id
 }
 
 output "subnet_ids" {
-  description = "IDs de las subnets públicas creadas."
+  description = "IDs de las subnets publicas creadas."
   value       = module.vpc.subnet_ids
 }
 

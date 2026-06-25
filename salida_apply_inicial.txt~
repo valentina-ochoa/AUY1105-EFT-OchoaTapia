@@ -1,0 +1,499 @@
+[0m[1mmodule.vpc.data.aws_caller_identity.current: Reading...[0m[0m
+[0m[1mmodule.ec2.data.aws_ami.ubuntu: Reading...[0m[0m
+[0m[1mmodule.vpc.data.aws_caller_identity.current: Read complete after 0s [id=211125553604][0m
+[0m[1mmodule.ec2.data.aws_ami.ubuntu: Read complete after 1s [id=ami-0f8a61b66d1accaee][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # module.ec2.aws_iam_instance_profile.ec2_profile[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_instance_profile" "ec2_profile" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m create_date = (known after apply)
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "AUY1105-Tapia-Ochoa-ec2-profile"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m role        = "AUY1105-Tapia-Ochoa-ec2-role"
+      [32m+[0m[0m tags_all    = (known after apply)
+      [32m+[0m[0m unique_id   = (known after apply)
+    }
+
+[1m  # module.ec2.aws_iam_role.ec2_role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "ec2_role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "AUY1105-Tapia-Ochoa-ec2-role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m tags                  = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-ec2-role"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m tags_all              = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-ec2-role"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m unique_id             = (known after apply)
+
+      [32m+[0m[0m inline_policy (known after apply)
+    }
+
+[1m  # module.ec2.aws_instance.ec2[0m will be created
+[0m  [32m+[0m[0m resource "aws_instance" "ec2" {
+      [32m+[0m[0m ami                                  = "ami-0f8a61b66d1accaee"
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m associate_public_ip_address          = false
+      [32m+[0m[0m availability_zone                    = (known after apply)
+      [32m+[0m[0m cpu_core_count                       = (known after apply)
+      [32m+[0m[0m cpu_threads_per_core                 = (known after apply)
+      [32m+[0m[0m disable_api_stop                     = (known after apply)
+      [32m+[0m[0m disable_api_termination              = (known after apply)
+      [32m+[0m[0m ebs_optimized                        = true
+      [32m+[0m[0m enable_primary_ipv6                  = (known after apply)
+      [32m+[0m[0m get_password_data                    = false
+      [32m+[0m[0m host_id                              = (known after apply)
+      [32m+[0m[0m host_resource_group_arn              = (known after apply)
+      [32m+[0m[0m iam_instance_profile                 = "AUY1105-Tapia-Ochoa-ec2-profile"
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_initiated_shutdown_behavior = (known after apply)
+      [32m+[0m[0m instance_lifecycle                   = (known after apply)
+      [32m+[0m[0m instance_state                       = (known after apply)
+      [32m+[0m[0m instance_type                        = "t3.micro"
+      [32m+[0m[0m ipv6_address_count                   = (known after apply)
+      [32m+[0m[0m ipv6_addresses                       = (known after apply)
+      [32m+[0m[0m key_name                             = (known after apply)
+      [32m+[0m[0m monitoring                           = true
+      [32m+[0m[0m outpost_arn                          = (known after apply)
+      [32m+[0m[0m password_data                        = (known after apply)
+      [32m+[0m[0m placement_group                      = (known after apply)
+      [32m+[0m[0m placement_partition_number           = (known after apply)
+      [32m+[0m[0m primary_network_interface_id         = (known after apply)
+      [32m+[0m[0m private_dns                          = (known after apply)
+      [32m+[0m[0m private_ip                           = (known after apply)
+      [32m+[0m[0m public_dns                           = (known after apply)
+      [32m+[0m[0m public_ip                            = (known after apply)
+      [32m+[0m[0m secondary_private_ips                = (known after apply)
+      [32m+[0m[0m security_groups                      = (known after apply)
+      [32m+[0m[0m source_dest_check                    = true
+      [32m+[0m[0m spot_instance_request_id             = (known after apply)
+      [32m+[0m[0m subnet_id                            = (known after apply)
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-ec2"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-ec2"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m tenancy                              = (known after apply)
+      [32m+[0m[0m user_data                            = (known after apply)
+      [32m+[0m[0m user_data_base64                     = (known after apply)
+      [32m+[0m[0m user_data_replace_on_change          = false
+      [32m+[0m[0m vpc_security_group_ids               = (known after apply)
+
+      [32m+[0m[0m capacity_reservation_specification (known after apply)
+
+      [32m+[0m[0m cpu_options (known after apply)
+
+      [32m+[0m[0m ebs_block_device (known after apply)
+
+      [32m+[0m[0m enclave_options (known after apply)
+
+      [32m+[0m[0m ephemeral_block_device (known after apply)
+
+      [32m+[0m[0m instance_market_options (known after apply)
+
+      [32m+[0m[0m maintenance_options (known after apply)
+
+      [32m+[0m[0m metadata_options {
+          [32m+[0m[0m http_endpoint               = "enabled"
+          [32m+[0m[0m http_protocol_ipv6          = "disabled"
+          [32m+[0m[0m http_put_response_hop_limit = (known after apply)
+          [32m+[0m[0m http_tokens                 = "required"
+          [32m+[0m[0m instance_metadata_tags      = (known after apply)
+        }
+
+      [32m+[0m[0m network_interface (known after apply)
+
+      [32m+[0m[0m private_dns_name_options (known after apply)
+
+      [32m+[0m[0m root_block_device {
+          [32m+[0m[0m delete_on_termination = true
+          [32m+[0m[0m device_name           = (known after apply)
+          [32m+[0m[0m encrypted             = true
+          [32m+[0m[0m iops                  = (known after apply)
+          [32m+[0m[0m kms_key_id            = (known after apply)
+          [32m+[0m[0m tags_all              = (known after apply)
+          [32m+[0m[0m throughput            = (known after apply)
+          [32m+[0m[0m volume_id             = (known after apply)
+          [32m+[0m[0m volume_size           = 20
+          [32m+[0m[0m volume_type           = "gp3"
+        }
+    }
+
+[1m  # module.vpc.aws_cloudwatch_log_group.vpc_flow_logs[0m will be created
+[0m  [32m+[0m[0m resource "aws_cloudwatch_log_group" "vpc_flow_logs" {
+      [32m+[0m[0m arn               = (known after apply)
+      [32m+[0m[0m id                = (known after apply)
+      [32m+[0m[0m kms_key_id        = (known after apply)
+      [32m+[0m[0m log_group_class   = (known after apply)
+      [32m+[0m[0m name              = "/aws/vpc/AUY1105-Tapia-Ochoa-flow-logs"
+      [32m+[0m[0m name_prefix       = (known after apply)
+      [32m+[0m[0m retention_in_days = 365
+      [32m+[0m[0m skip_destroy      = false
+      [32m+[0m[0m tags              = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-loggroup"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m tags_all          = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-loggroup"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+    }
+
+[1m  # module.vpc.aws_default_security_group.default[0m will be created
+[0m  [32m+[0m[0m resource "aws_default_security_group" "default" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = (known after apply)
+      [32m+[0m[0m egress                 = []
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = []
+      [32m+[0m[0m name                   = (known after apply)
+      [32m+[0m[0m name_prefix            = (known after apply)
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags_all               = (known after apply)
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.vpc.aws_flow_log.vpc_flow_logs[0m will be created
+[0m  [32m+[0m[0m resource "aws_flow_log" "vpc_flow_logs" {
+      [32m+[0m[0m arn                      = (known after apply)
+      [32m+[0m[0m iam_role_arn             = (known after apply)
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m log_destination          = (known after apply)
+      [32m+[0m[0m log_destination_type     = "cloud-watch-logs"
+      [32m+[0m[0m log_format               = (known after apply)
+      [32m+[0m[0m log_group_name           = (known after apply)
+      [32m+[0m[0m max_aggregation_interval = 600
+      [32m+[0m[0m tags                     = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-flowlog"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m tags_all                 = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-flowlog"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m traffic_type             = "ALL"
+      [32m+[0m[0m vpc_id                   = (known after apply)
+    }
+
+[1m  # module.vpc.aws_iam_role.flow_logs_role[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "flow_logs_role" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "vpc-flow-logs.amazonaws.com"
+                        }
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "AUY1105-Tapia-Ochoa-flowlogs-role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m tags                  = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-flowlogs-role"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m tags_all              = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-flowlogs-role"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m unique_id             = (known after apply)
+
+      [32m+[0m[0m inline_policy (known after apply)
+    }
+
+[1m  # module.vpc.aws_iam_role_policy.flow_logs_policy[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy" "flow_logs_policy" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "AUY1105-Tapia-Ochoa-flowlogs-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m policy      = (known after apply)
+      [32m+[0m[0m role        = (known after apply)
+    }
+
+[1m  # module.vpc.aws_kms_key.logs_key[0m will be created
+[0m  [32m+[0m[0m resource "aws_kms_key" "logs_key" {
+      [32m+[0m[0m arn                                = (known after apply)
+      [32m+[0m[0m bypass_policy_lockout_safety_check = false
+      [32m+[0m[0m customer_master_key_spec           = "SYMMETRIC_DEFAULT"
+      [32m+[0m[0m deletion_window_in_days            = 7
+      [32m+[0m[0m description                        = "KMS key para CloudWatch Logs - AUY1105-Tapia-Ochoa"
+      [32m+[0m[0m enable_key_rotation                = true
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m is_enabled                         = true
+      [32m+[0m[0m key_id                             = (known after apply)
+      [32m+[0m[0m key_usage                          = "ENCRYPT_DECRYPT"
+      [32m+[0m[0m multi_region                       = (known after apply)
+      [32m+[0m[0m policy                             = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "kms:*"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m AWS = "arn:aws:iam::211125553604:root"
+                        }
+                      [32m+[0m[0m Resource  = "*"
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m rotation_period_in_days            = (known after apply)
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-kms"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-kms"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+    }
+
+[1m  # module.vpc.aws_security_group.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group" "main" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = "Security Group gestionado por módulo VPC - AUY1105-Tapia-Ochoa"
+      [32m+[0m[0m egress                 = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m description      = "Allow all outbound"
+              [32m+[0m[0m from_port        = 0
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "-1"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 0
+            },
+        ]
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "10.0.0.0/8",
+                ]
+              [32m+[0m[0m description      = "Allow SSH from internal networks only"
+              [32m+[0m[0m from_port        = 22
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 22
+            },
+        ]
+      [32m+[0m[0m name                   = "AUY1105-Tapia-Ochoa-sg"
+      [32m+[0m[0m name_prefix            = (known after apply)
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags                   = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-sg"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m tags_all               = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-sg"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.vpc.aws_subnet.public[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = (known after apply)
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.1.1.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-subnet-public-1"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+          [32m+[0m[0m "Tier"        = "public"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-subnet-public-1"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+          [32m+[0m[0m "Tier"        = "public"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.vpc.aws_vpc.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_vpc" "main" {
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m cidr_block                           = "10.1.0.0/16"
+      [32m+[0m[0m default_network_acl_id               = (known after apply)
+      [32m+[0m[0m default_route_table_id               = (known after apply)
+      [32m+[0m[0m default_security_group_id            = (known after apply)
+      [32m+[0m[0m dhcp_options_id                      = (known after apply)
+      [32m+[0m[0m enable_dns_hostnames                 = true
+      [32m+[0m[0m enable_dns_support                   = true
+      [32m+[0m[0m enable_network_address_usage_metrics = (known after apply)
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_tenancy                     = "default"
+      [32m+[0m[0m ipv6_association_id                  = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                      = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_network_border_group = (known after apply)
+      [32m+[0m[0m main_route_table_id                  = (known after apply)
+      [32m+[0m[0m owner_id                             = (known after apply)
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-vpc"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Environment" = "dev"
+          [32m+[0m[0m "ManagedBy"   = "Terraform"
+          [32m+[0m[0m "Name"        = "AUY1105-Tapia-Ochoa-vpc"
+          [32m+[0m[0m "Project"     = "AUY1105-Tapia-Ochoa"
+        }
+    }
+
+[1mPlan:[0m [0m12 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  [32m+[0m[0m cloudwatch_log_group_name = "/aws/vpc/AUY1105-Tapia-Ochoa-flow-logs"
+  [32m+[0m[0m iam_role_name             = "AUY1105-Tapia-Ochoa-ec2-role"
+  [32m+[0m[0m instance_id               = (known after apply)
+  [32m+[0m[0m instance_ip               = (known after apply)
+  [32m+[0m[0m security_group_id         = (known after apply)
+  [32m+[0m[0m subnet_ids                = [
+      [32m+[0m[0m (known after apply),
+    ]
+  [32m+[0m[0m vpc_id                    = (known after apply)
+[0m[1mmodule.ec2.aws_iam_role.ec2_role: Creating...[0m[0m
+[0m[1mmodule.vpc.aws_kms_key.logs_key: Creating...[0m[0m
+[0m[1mmodule.vpc.aws_vpc.main: Creating...[0m[0m
+[0m[1mmodule.vpc.aws_iam_role.flow_logs_role: Creating...[0m[0m
+[0m[1mmodule.vpc.aws_kms_key.logs_key: Still creating... [00m10s elapsed][0m[0m
+[0m[1mmodule.vpc.aws_vpc.main: Still creating... [00m10s elapsed][0m[0m
+[0m[1mmodule.vpc.aws_vpc.main: Creation complete after 13s [id=vpc-07a2fe4253b7db294][0m
+[0m[1mmodule.vpc.aws_default_security_group.default: Creating...[0m[0m
+[0m[1mmodule.vpc.aws_subnet.public[0]: Creating...[0m[0m
+[0m[1mmodule.vpc.aws_security_group.main: Creating...[0m[0m
+[0m[1mmodule.vpc.aws_subnet.public[0]: Creation complete after 1s [id=subnet-0dcf39862cba80c94][0m
+[0m[1mmodule.vpc.aws_kms_key.logs_key: Creation complete after 15s [id=cd949823-3e55-4fca-9573-39537cec141f][0m
+[0m[1mmodule.vpc.aws_cloudwatch_log_group.vpc_flow_logs: Creating...[0m[0m
+[0m[1mmodule.vpc.aws_default_security_group.default: Creation complete after 3s [id=sg-09e99aa2fce474204][0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mcreating IAM Role (AUY1105-Tapia-Ochoa-ec2-role): operation error IAM: CreateRole, https response error StatusCode: 403, RequestID: b698ff4f-1383-4db7-b9fe-215e8dae786a, api error AccessDenied: User: arn:aws:sts::211125553604:assumed-role/voclabs/user3256486=cristo.tapiap@duocuc.cl is not authorized to perform: iam:CreateRole on resource: arn:aws:iam::211125553604:role/AUY1105-Tapia-Ochoa-ec2-role because no identity-based policy allows the iam:CreateRole action[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.ec2.aws_iam_role.ec2_role,
+[31m│[0m [0m  on modules\ec2\main.tf line 16, in resource "aws_iam_role" "ec2_role":
+[31m│[0m [0m  16: resource "aws_iam_role" "ec2_role" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mcreating Security Group (AUY1105-Tapia-Ochoa-sg): operation error EC2: CreateSecurityGroup, https response error StatusCode: 400, RequestID: 8c496235-2d24-4a6c-8ed1-40c8a41214b9, api error InvalidParameterValue: Value (Security Group gestionado por módulo VPC - AUY1105-Tapia-Ochoa) for parameter GroupDescription is invalid. Character sets beyond ASCII are not supported.[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.vpc.aws_security_group.main,
+[31m│[0m [0m  on modules\vpc\main.tf line 33, in resource "aws_security_group" "main":
+[31m│[0m [0m  33: resource "aws_security_group" "main" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mcreating CloudWatch Logs Log Group (/aws/vpc/AUY1105-Tapia-Ochoa-flow-logs): operation error CloudWatch Logs: CreateLogGroup, https response error StatusCode: 400, RequestID: af0259c7-106a-4c9d-a141-8abad55b1cf0, api error AccessDeniedException: The specified KMS key does not exist or is not allowed to be used with Arn 'arn:aws:logs:us-east-1:211125553604:log-group:/aws/vpc/AUY1105-Tapia-Ochoa-flow-logs'[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.vpc.aws_cloudwatch_log_group.vpc_flow_logs,
+[31m│[0m [0m  on modules\vpc\main.tf line 86, in resource "aws_cloudwatch_log_group" "vpc_flow_logs":
+[31m│[0m [0m  86: resource "aws_cloudwatch_log_group" "vpc_flow_logs" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mcreating IAM Role (AUY1105-Tapia-Ochoa-flowlogs-role): operation error IAM: CreateRole, https response error StatusCode: 403, RequestID: 3172f9fe-d5e0-4c03-9fe9-8555cae0147c, api error AccessDenied: User: arn:aws:sts::211125553604:assumed-role/voclabs/user3256486=cristo.tapiap@duocuc.cl is not authorized to perform: iam:CreateRole on resource: arn:aws:iam::211125553604:role/AUY1105-Tapia-Ochoa-flowlogs-role because no identity-based policy allows the iam:CreateRole action[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  with module.vpc.aws_iam_role.flow_logs_role,
+[31m│[0m [0m  on modules\vpc\main.tf line 96, in resource "aws_iam_role" "flow_logs_role":
+[31m│[0m [0m  96: resource "aws_iam_role" "flow_logs_role" [4m{[0m[0m
+[31m│[0m [0m
+[31m╵[0m[0m

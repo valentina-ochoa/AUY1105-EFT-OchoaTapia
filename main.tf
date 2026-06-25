@@ -5,7 +5,7 @@ module "vpc" {
   vpc_cidr            = var.vpc_cidr
   public_subnet_cidrs = var.public_subnet_cidrs
   availability_zones  = var.availability_zones
-  sg_description      = "Security Group gestionado por módulo VPC - ${var.project_name}"
+  sg_description      = "Security Group gestionado por modulo VPC - ${var.project_name}"
   log_retention_days  = var.log_retention_days
 
   ingress_rules = [
