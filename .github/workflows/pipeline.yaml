@@ -35,7 +35,7 @@ jobs:
         with:
           directory: .
           framework: terraform
-          soft_fail: true
+          soft_fail: false
 
   validacion-terraform:
     name: "Etapa 3 - Terraform Validate + OPA"
