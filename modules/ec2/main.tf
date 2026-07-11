@@ -47,7 +47,7 @@ resource "aws_instance" "ec2" {
 
   user_data = var.user_data != "" ? var.user_data : null
 
-  tags = merge(var.tags, {
+  tags = {
     Name = "${var.project_name}-ec2"
-  })
+  }
 }
