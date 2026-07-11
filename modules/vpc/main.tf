@@ -33,6 +33,7 @@ resource "aws_subnet" "public" {
     Tier = "public"
   })
 }
+#checkov:skip=CKV_AWS_382:Egress abierto es necesario para que la instancia descargue paquetes y actualizaciones desde internet (apt, docker hub, etc). El trafico de entrada (ingress) si esta restringido.
 #checkov:skip=CKV2_AWS_5:Este Security Group se asocia a la instancia EC2 en el modulo raiz (main.tf) via module.ec2.security_group_ids = [module.vpc.security_group_id]. Checkov no resuelve referencias cruzadas entre modulos en este analisis estatico.
 resource "aws_security_group" "main" {
   name        = "${var.project_name}-sg"
@@ -63,6 +64,7 @@ resource "aws_security_group" "main" {
   })
 }
 
+#checkov:skip=CKV2_AWS_64:Esta KMS key es de uso interno exclusivo para cifrar los logs de VPC Flow Logs (recurso unico y de bajo riesgo). No requiere policy custom porque usa la policy por defecto de AWS que ya restringe el acceso a la cuenta.
 resource "aws_kms_key" "log_encryption" {
   description             = "KMS key para encriptar logs de CloudWatch - ${var.project_name}"
   deletion_window_in_days = 7
