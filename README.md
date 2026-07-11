@@ -62,6 +62,18 @@ Cada Pull Request hacia `main` ejecuta 3 etapas en orden:
 
 Este proyecto sigue [Semantic Versioning](https://semver.org/) (`MAJOR.MINOR.PATCH`). Ver historial completo en [`CHANGELOG.md`](CHANGELOG.md).
 
+## Hallazgos de seguridad y excepciones documentadas
+
+Durante el análisis con Checkov (Etapa 2 del pipeline) se identificaron 3 hallazgos que fueron evaluados y gestionados de forma justificada, en lugar de ignorados sin más:
+
+| Check | Hallazgo | Resolución |
+|---|---|---|
+| `CKV2_AWS_64` | La KMS key de los logs no tenía policy personalizada | **Corregido de raíz**: se agregó `aws_kms_key.log_encryption` dedicada para cifrar los VPC Flow Logs en CloudWatch, con rotación automática habilitada. |
+| `CKV_AWS_382` | El Security Group permite egress abierto (`0.0.0.0/0`) | **Excepción justificada**: necesario para que la instancia descargue actualizaciones y paquetes desde internet. El ingress sí está restringido. |
+| `CKV2_AWS_5` | Checkov no detecta que el Security Group esté asociado a un recurso | **Falso positivo documentado**: el SG se asocia a la EC2 mediante referencia cruzada entre módulos (`module.ec2.security_group_ids = [module.vpc.security_group_id]`), que Checkov no resuelve en este análisis estático. |
+
+Las excepciones se aplican mediante `skip_check` en `.github/workflows/pipeline.yaml`, con la justificación de cada una documentada también como comentario `#checkov:skip` directamente en el código (`modules/vpc/main.tf`).
+
 ## Cómo usar
 
 Ver ejemplo funcional completo en [`examples/main.tf`](examples/main.tf), donde se orquestan ambos módulos juntos.
