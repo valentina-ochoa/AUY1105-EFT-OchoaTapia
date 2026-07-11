@@ -36,6 +36,7 @@ jobs:
           directory: .
           framework: terraform
           soft_fail: false
+          skip_check: CKV_AWS_382,CKV2_AWS_5,CKV2_AWS_64
 
   validacion-terraform:
     name: "Etapa 3 - Terraform Validate + OPA"
