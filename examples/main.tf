@@ -34,7 +34,7 @@ module "ec2" {
   project_name        = "AUY1105-Tapia-Ochoa"
   subnet_id           = module.vpc.subnet_ids[0]
   security_group_ids  = [module.vpc.security_group_id]
-  instance_type       = "t3.micro"
+  instance_type       = "t3.large"
   associate_public_ip = false
   root_volume_type    = "gp3"
   root_volume_size    = 20

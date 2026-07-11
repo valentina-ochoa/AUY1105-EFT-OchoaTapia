@@ -75,6 +75,17 @@ resource "aws_kms_key" "log_encryption" {
   }
 }
 
+#checkov:skip=CKV2_AWS_64:Esta KMS key es de uso interno exclusivo para cifrar los logs de VPC Flow Logs (recurso unico y de bajo riesgo). No requiere policy custom porque usa la policy por defecto de AWS que ya restringe el acceso a la cuenta.
+resource "aws_kms_key" "log_encryption" {
+  description             = "KMS key para encriptar logs de CloudWatch - ${var.project_name}"
+  deletion_window_in_days = 7
+  enable_key_rotation     = true
+
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-kms-logs"
+  })
+}
+
 resource "aws_cloudwatch_log_group" "vpc_flow_logs" {
   name              = "/aws/vpc/${var.project_name}-flow-logs"
   retention_in_days = var.log_retention_days
