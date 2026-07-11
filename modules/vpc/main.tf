@@ -33,7 +33,7 @@ resource "aws_subnet" "public" {
     Tier = "public"
   })
 }
-
+#checkov:skip=CKV2_AWS_5:Este Security Group se asocia a la instancia EC2 en el modulo raiz (main.tf) via module.ec2.security_group_ids = [module.vpc.security_group_id]. Checkov no resuelve referencias cruzadas entre modulos en este analisis estatico.
 resource "aws_security_group" "main" {
   name        = "${var.project_name}-sg"
   description = var.sg_description
@@ -63,9 +63,20 @@ resource "aws_security_group" "main" {
   })
 }
 
+resource "aws_kms_key" "log_encryption" {
+  description             = "KMS key para encriptar logs de CloudWatch - ${var.project_name}"
+  deletion_window_in_days = 7
+  enable_key_rotation     = true
+
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-kms-logs"
+  })
+}
+
 resource "aws_cloudwatch_log_group" "vpc_flow_logs" {
   name              = "/aws/vpc/${var.project_name}-flow-logs"
   retention_in_days = var.log_retention_days
+  kms_key_id        = aws_kms_key.log_encryption.arn
 
   tags = merge(var.tags, {
     Name = "${var.project_name}-loggroup"
